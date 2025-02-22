@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:favorite_places/API/map_api.dart';
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/screens/map.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +30,12 @@ class _LocationInputState extends State<LocationInput> {
     }
     final latitude = _pickedLocation!.lat;
     final longitude = _pickedLocation!.lon;
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude=&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=AIzaSyBot2la5F75CJp5jcj3j05EZcOBjygukzU';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude=&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=${googleMapsApiKey}';
   }
 
   Future<void> _savePlace(double latitude, double longitude) async {
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBot2la5F75CJp5jcj3j05EZcOBjygukzU');
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=${googleMapsApiKey}');
 
     final response = await http.get(url);
 
